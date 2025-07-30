@@ -33,22 +33,26 @@ function TareaDetalle({ tareas }: Props) {
         </p>
         <div className="form">
           {body.estado ? (
-            <form>
-              <button className="btn btn-danger">Marcar Pendiente</button>
-            </form>
+            <button className="btn btn-secondary">
+              <i className="bi bi-x"></i>
+            </button>
           ) : (
             <form>
               <button className="btn btn-success">
-                Marcar como Completada
+                <i className="bi bi-check2-all"></i>
               </button>
             </form>
           )}
 
           <form method="get " action="/">
-            <button className="btn btn-primary">Modificar Tarea</button>
+            <button className="btn btn-primary">
+              <i className="bi bi-pencil"></i>
+            </button>
           </form>
           <form method="get " action="/">
-            <button className="btn btn-danger">Eliminar Tarea</button>
+            <button className="btn btn-danger">
+              <i className="bi bi-trash"></i>
+            </button>
           </form>
         </div>
       </div>

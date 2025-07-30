@@ -47,8 +47,35 @@ function uno(tabla, id) {
     );
   });
 }
+function agregar(tabla, data) {
+  return new Promise((res, rej) => {
+    const columnas = Object.keys(data);
+    const updatedata = columnas
+      .map((col) => `${col} = VALUES(${col})`)
+      .join(", ");
+    const query = `INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ${updatedata}`;
+    console.log("Consulta generada:", query);
+    console.log("Datos:", data);
+    connection.query(query, [data], (err, results) => {
+      return err ? rej(err) : res(results);
+    });
+  });
+}
+function eliminar(tabla, data) {
+  return new Promise((res, rej) => {
+    connection.query(
+      `DELETE FROM ${tabla} WHERE id = ? `,
+      data.id,
+      (err, results) => {
+        return err ? rej(err) : res(results);
+      }
+    );
+  });
+}
 
 module.exports = {
   getALL,
   uno,
+  agregar,
+  eliminar,
 };
