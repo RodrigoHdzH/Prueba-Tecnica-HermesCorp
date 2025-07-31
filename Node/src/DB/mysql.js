@@ -61,11 +61,10 @@ function agregar(tabla, data) {
     });
   });
 }
-function eliminar(tabla, data) {
+function eliminar(tabla, id) {
   return new Promise((res, rej) => {
     connection.query(
-      `DELETE FROM ${tabla} WHERE id = ? `,
-      data.id,
+      `DELETE FROM ${tabla} WHERE id = ${id} `,
       (err, results) => {
         return err ? rej(err) : res(results);
       }

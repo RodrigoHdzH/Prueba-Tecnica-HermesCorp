@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import axios from "axios";
+
 interface Props {
   tareas: {
     id: number;
@@ -49,11 +51,20 @@ function TareaDetalle({ tareas }: Props) {
               <i className="bi bi-pencil"></i>
             </button>
           </form>
-          <form method="get " action="/">
-            <button className="btn btn-danger">
-              <i className="bi bi-trash"></i>
-            </button>
-          </form>
+
+          <button
+            className="btn btn-danger"
+            onClick={(e) => {
+              e.stopPropagation();
+              axios
+                .delete(`http://localhost:4000/eliminar/${body.id}`)
+                .then(() => (window.location.href = "/"))
+
+                .catch((err) => console.log("Error al eliminar:", err));
+            }}
+          >
+            <i className="bi bi-trash"></i>
+          </button>
         </div>
       </div>
     </div>

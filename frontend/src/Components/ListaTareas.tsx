@@ -1,5 +1,7 @@
-import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";
 import "../App.css";
+import axios from "axios";
+
 interface Props {
   tareas: {
     id: number;
@@ -12,108 +14,121 @@ interface Props {
 function ListaTareas({ tareas }: Props) {
   return (
     <div className="contenedor">
-      <div className="row">
-        <h3 className="pendientes">PENDIENTES DE HACER</h3>
+      <div className="row ">
+        <h3 className="pendientes">TAREAS PENDIENTES</h3>
         {tareas
           .filter((t) => !t.estado)
           .map((body) => (
-            <a href={`/${body.id}`} className="link col">
-              <div className="card my-card " key={body.id}>
-                <p className="estado no-completa "> Tarea No completada </p>
-                <h5>Tarea No.{body.id}</h5>{" "}
-                <div className="card-body">
-                  <h5 className="card-text">Título: {body.titulo}</h5>
-                  <p className="card-text">
-                    Descripción: {body.descripcion.slice(0, 50) + " ..."}
-                  </p>
-                  <p className="card-text">
-                    Fecha de creación:{" "}
-                    {new Date(body.fecha_creacion).toLocaleDateString("es-MX")}
-                  </p>
-                  <div className="form">
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        const nuevoEstado = { id: body.id, estado: 1 };
+            // <a href={`/${body.id}`} className="link col">
+            <div
+              className="card my-card "
+              key={body.id}
+              onClick={() => (window.location.href = `/Tarea/${body.id}`)}
+              style={{ cursor: "pointer" }}
+            >
+              <p className="estado no-completa "> Tarea No completada </p>
+              <h5>Tarea No.{body.id}</h5>{" "}
+              <div className="card-body">
+                <h5 className="card-text">Título: {body.titulo}</h5>
+                <p className="card-text">
+                  Descripción: {body.descripcion.slice(0, 50) + " ..."}
+                </p>
+                <p className="card-text">
+                  Fecha de creación:{" "}
+                  {new Date(body.fecha_creacion).toLocaleDateString("es-MX")}
+                </p>
+                <div className="form">
+                  {/* MARCAR COMO COMPLETADO */}
 
-                        fetch("/", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify(nuevoEstado),
-                        }).then((res) => {
-                          if (res.ok) {
-                            // window.location.href = "/";
-                            location.reload();
-                          } else {
-                            console.error("Fallo al actualizar");
-                          }
-                        });
-                      }}
-                    >
-                      <button className="btn btn-success">
-                        <i className="bi bi-check2-all"></i>
-                      </button>
-                    </form>
-                    <form method="get" action={`/modificar/${body.id}`}>
-                      <button className="btn btn-primary">
-                        <i className="bi bi-pencil"></i>
-                      </button>
-                    </form>
-                    <form>
-                      <button className="btn btn-danger" type="submit">
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </form>
-                  </div>
+                  <button className="btn btn-success">
+                    <i className="bi bi-check2-all"></i>
+                  </button>
+                  {/* MODIFICAR */}
+
+                  <button
+                    className="btn btn-primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = `/modificar/${body.id}`;
+                    }}
+                  >
+                    <i className="bi bi-pencil"></i>
+                  </button>
+
+                  {/* ELIMINAR */}
+
+                  <button
+                    className="btn btn-danger"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      axios
+                        .delete(`http://localhost:4000/eliminar/${body.id}`)
+                        .then(() => location.reload())
+                        .catch((err) => console.log("Error al eliminar:", err));
+                    }}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
                 </div>
               </div>
-            </a>
+            </div>
+            // </a>
           ))}
       </div>
-      {/* ///// */}
+      {/* Tareas completadas */}
       <div className="row-2">
-        <h3 className="completada">COMPLETADAS</h3>
+        <h3 className="completada">TAREAS CONCLUIDAS</h3>
 
         {tareas
           .filter((t) => t.estado)
           .map((body) => (
-            <a href={`/${body.id}`} className="link col">
-              <div className="card my-card " key={body.id}>
-                <p className="estado completa">Tarea Completada</p>
-                <h5>Tarea No.{body.id}</h5>{" "}
-                <div className="card-body">
-                  <h5 className="card-text">Título: {body.titulo}</h5>
-                  <p className="card-text">
-                    Descripción: {body.descripcion.slice(0, 50) + " ..."}
-                  </p>
-                  <p className="card-text">
-                    Fecha de creación:{" "}
-                    {new Date(body.fecha_creacion).toLocaleDateString("es-MX")}
-                  </p>
-                  <div className="form">
-                    <form>
-                      <button className="btn btn-secondary">
-                        <i className="bi bi-x"></i>
-                      </button>
-                    </form>
-                    <form method="get" action={`/modificar/${body.id}`}>
-                      <button className="btn btn-primary">
-                        <i className="bi bi-pencil"></i>
-                      </button>
-                    </form>
-                    <form method="get " action="/">
-                      <button className="btn btn-danger">
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </form>
-                  </div>
+            <div
+              className="card my-card "
+              key={body.id}
+              onClick={() => (window.location.href = `/Tarea/${body.id}`)}
+              style={{ cursor: "pointer" }}
+            >
+              <p className="estado completa">Tarea Completada</p>
+              <h5>Tarea No.{body.id}</h5>{" "}
+              <div className="card-body">
+                <h5 className="card-text">Título: {body.titulo}</h5>
+                <p className="card-text">
+                  Descripción: {body.descripcion.slice(0, 50) + " ..."}
+                </p>
+                <p className="card-text">
+                  Fecha de creación:{" "}
+                  {new Date(body.fecha_creacion).toLocaleDateString("es-MX")}
+                </p>
+                <div className="form">
+                  <form>
+                    <button className="btn btn-secondary">
+                      <i className="bi bi-x"></i>
+                    </button>
+                  </form>
+                  <form method="get" action={`/modificar/${body.id}`}>
+                    <button className="btn btn-primary">
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                  </form>
+
+                  <button
+                    className="btn btn-danger"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      axios
+                        .delete(`http://localhost:4000/eliminar/${body.id}`)
+                        .then(() => location.reload())
+                        .catch((err) => console.log("Error al eliminar:", err));
+                    }}
+                  >
+                    <i className="bi bi-trash"></i>
+                  </button>
                 </div>
               </div>
-            </a>
+            </div>
           ))}
       </div>
+      {/* Boton flotante agregar */}
       <form action="/agregar">
         <button className="btn-float">
           <h1>

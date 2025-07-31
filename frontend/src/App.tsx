@@ -30,7 +30,7 @@ function App() {
               ></Route>
 
               <Route
-                path="/:id"
+                path="/Tarea/:id"
                 element={<TareaDetalle tareas={data?.body || []} />}
               ></Route>
               <Route path="/agregar" element={<FormularioTareas />}></Route>

@@ -5,9 +5,9 @@ const controlador = require("./index");
 
 // Ruta principal
 router.get("/", getALL);
-router.get("/:id", uno);
+router.get("/Tarea/:id", uno);
 router.post("/", agregar);
-router.put("/", eliminar);
+router.delete("/eliminar/:id", eliminar);
 
 async function getALL(req, res) {
   const tareas = await controlador.getALL();
@@ -32,7 +32,7 @@ async function agregar(req, res, next) {
 }
 async function eliminar(req, res, next) {
   try {
-    const items = await controlador.eliminar(req.body);
+    const items = await controlador.eliminar(req.params.id);
     respuesta.success(req, res, "Item eliminado", 200);
   } catch (err) {
     next(err);
