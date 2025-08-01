@@ -30,7 +30,7 @@ cd Prueba-Tecnica-HermesCorp
 
 ---
 
-## ⚙️ Configuración de entorno
+## Configuración de entorno
 
 Antes de ejecutar el backend, asegúrate de tener un archivo `.env` en la carpeta `Node` con el siguiente contenido:
 
