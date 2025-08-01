@@ -18,7 +18,7 @@ export function useFetch(url) {
         setData(data);
         setError(null);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Sin respuesta del servidor :(");
         setData(null);
       })

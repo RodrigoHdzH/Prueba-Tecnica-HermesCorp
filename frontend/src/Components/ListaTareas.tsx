@@ -1,5 +1,3 @@
-// import { redirect } from "react-router-dom";
-import "../App.css";
 import axios from "axios";
 
 interface Props {
@@ -14,12 +12,11 @@ interface Props {
 function ListaTareas({ tareas }: Props) {
   return (
     <div className="contenedor">
-      <div className="row ">
+      <div className="row-2 ">
         <h3 className="pendientes">TAREAS PENDIENTES</h3>
         {tareas
           .filter((t) => !t.estado)
           .map((body) => (
-            // <a href={`/${body.id}`} className="link col">
             <div
               className="card my-card "
               key={body.id}
@@ -86,7 +83,6 @@ function ListaTareas({ tareas }: Props) {
                 </div>
               </div>
             </div>
-            // </a>
           ))}
       </div>
       {/* Tareas completadas */}
@@ -115,6 +111,7 @@ function ListaTareas({ tareas }: Props) {
                 </p>
                 <div className="form">
                   <form>
+                    {/* MARCAR COMO PENDIENTE */}
                     <button
                       className="btn btn-secondary"
                       onClick={(e) => {
@@ -135,11 +132,13 @@ function ListaTareas({ tareas }: Props) {
                       <i className="bi bi-x"></i>
                     </button>
                   </form>
+                  {/* MODIFICAR  */}
                   <form method="get" action={`/modificar/${body.id}`}>
                     <button className="btn btn-primary">
                       <i className="bi bi-pencil"></i>
                     </button>
                   </form>
+                  {/* ELIMINAR  */}
 
                   <button
                     className="btn btn-danger"

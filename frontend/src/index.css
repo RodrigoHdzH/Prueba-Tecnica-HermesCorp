@@ -5,7 +5,6 @@
   align-items: flex-start;
 }
 
-.row,
 .row-2 {
   flex: 1 1 50%;
   padding: 1rem;
@@ -17,6 +16,7 @@
 }
 .pendientes {
   background-color: rgba(255, 0, 0, 0.342);
+  min-width: 100%;
   color: white;
   border-radius: 20px;
   text-align: center;
@@ -28,10 +28,6 @@
   border-radius: 20px;
   text-align: center;
 }
-/* .div {
-  min-width: 71%;
-  margin: 15px;
-} */
 
 html,
 body {
@@ -59,7 +55,6 @@ h1 {
 }
 
 .formulario {
-  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -131,7 +126,6 @@ nav {
 
 body {
   background-color: #dfdfdc;
-  /* background-color: #000000; */
 
   color: #0d0d0c;
 }

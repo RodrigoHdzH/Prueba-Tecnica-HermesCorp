@@ -16,8 +16,7 @@ interface Props {
 function FormularioTareas({ tareas }: Props) {
   const { id } = useParams();
   const idtarea = Number(id);
-  // const { estado } = useParams();
-  // const estadotarea = Number(estado);
+
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [estado, setEstado] = useState(0);
@@ -57,6 +56,7 @@ function FormularioTareas({ tareas }: Props) {
           ></textarea>
           <label htmlFor="floatingTextarea2">Descripción</label>
         </div>
+        <h1> </h1>
         <div className="form-check">
           <input
             className="form-check-input"

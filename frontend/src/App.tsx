@@ -4,7 +4,6 @@ import ListaTareas from "./Components/ListaTareas";
 import TareaDetalle from "./Components/TareaDetalle";
 import FormularioTareas from "./Components/FormularioTarea";
 import Navbar from "./Components/Navbar";
-import "./App.css";
 
 function App() {
   const { data, loading, error } = useFetch("http://localhost:4000");
