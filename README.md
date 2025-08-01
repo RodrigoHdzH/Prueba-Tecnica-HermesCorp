@@ -2,7 +2,7 @@
 
 Prueba Técnica HermesCorp de Rodrigo Hernández
 
-## 📝 Registro de Tareas (Frontend + Backend)
+##  Registro de Tareas (Frontend + Backend)
 
 Este proyecto es una aplicación web que permite gestionar tareas marcándolas como completadas o no completadas. Está compuesto por:
 
@@ -14,7 +14,7 @@ El objetivo es proporcionar una herramienta simple para crear, consultar y actua
 
 ---
 
-## 🚀 Instalación y ejecución
+##  Instalación y ejecución
 
 ### 1. Clonar el repositorio
 
@@ -72,7 +72,7 @@ El frontend correrá en `http://localhost:5173`.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
 ### Backend
 
