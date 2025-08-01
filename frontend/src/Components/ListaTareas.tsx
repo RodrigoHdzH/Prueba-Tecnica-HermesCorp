@@ -40,7 +40,21 @@ function ListaTareas({ tareas }: Props) {
                 <div className="form">
                   {/* MARCAR COMO COMPLETADO */}
 
-                  <button className="btn btn-success">
+                  <button
+                    className="btn btn-success"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      axios
+                        .post(`http://localhost:4000/`, {
+                          id: body.id,
+                          titulo: body.titulo,
+                          descripcion: body.descripcion,
+                          estado: 1,
+                        })
+                        .then(() => (window.location.href = "/"))
+                        .catch((err) => console.log("Error al Guardar:", err));
+                    }}
+                  >
                     <i className="bi bi-check2-all"></i>
                   </button>
                   {/* MODIFICAR */}
@@ -101,7 +115,23 @@ function ListaTareas({ tareas }: Props) {
                 </p>
                 <div className="form">
                   <form>
-                    <button className="btn btn-secondary">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        axios
+                          .post(`http://localhost:4000/`, {
+                            id: body.id,
+                            titulo: body.titulo,
+                            descripcion: body.descripcion,
+                            estado: 0,
+                          })
+                          .then(() => (window.location.href = "/"))
+                          .catch((err) =>
+                            console.log("Error al Guardar:", err)
+                          );
+                      }}
+                    >
                       <i className="bi bi-x"></i>
                     </button>
                   </form>
@@ -118,7 +148,9 @@ function ListaTareas({ tareas }: Props) {
                       axios
                         .delete(`http://localhost:4000/eliminar/${body.id}`)
                         .then(() => location.reload())
-                        .catch((err) => console.log("Error al eliminar:", err));
+                        .catch((err) =>
+                          console.log("Error al actualizar:", err)
+                        );
                     }}
                   >
                     <i className="bi bi-trash"></i>
@@ -129,7 +161,8 @@ function ListaTareas({ tareas }: Props) {
           ))}
       </div>
       {/* Boton flotante agregar */}
-      <form action="/agregar">
+
+      <form action={`/agregar/0`}>
         <button className="btn-float">
           <h1>
             <i className="bi bi-plus-circle-fill"></i>

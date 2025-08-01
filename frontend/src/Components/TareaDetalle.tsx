@@ -35,18 +35,46 @@ function TareaDetalle({ tareas }: Props) {
         </p>
         <div className="form">
           {body.estado ? (
-            <button className="btn btn-secondary">
+            <button
+              className="btn btn-secondary"
+              onClick={(e) => {
+                e.stopPropagation();
+                axios
+                  .post(`http://localhost:4000/`, {
+                    id: body.id,
+                    titulo: body.titulo,
+                    descripcion: body.descripcion,
+                    estado: 0,
+                  })
+                  .then(() => location.reload())
+                  .catch((err) => console.log("Error al Guardar:", err));
+              }}
+            >
               <i className="bi bi-x"></i>
             </button>
           ) : (
             <form>
-              <button className="btn btn-success">
+              <button
+                className="btn btn-success"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  axios
+                    .post(`http://localhost:4000/`, {
+                      id: body.id,
+                      titulo: body.titulo,
+                      descripcion: body.descripcion,
+                      estado: 1,
+                    })
+                    .then(() => location.reload())
+                    .catch((err) => console.log("Error al Guardar:", err));
+                }}
+              >
                 <i className="bi bi-check2-all"></i>
               </button>
             </form>
           )}
 
-          <form method="get " action="/">
+          <form method="get " action={`/modificar/${body.id}`}>
             <button className="btn btn-primary">
               <i className="bi bi-pencil"></i>
             </button>

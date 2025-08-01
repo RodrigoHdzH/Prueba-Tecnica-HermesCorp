@@ -28,12 +28,19 @@ function App() {
                 path="/"
                 element={<ListaTareas tareas={data?.body || []} />}
               ></Route>
-
               <Route
                 path="/Tarea/:id"
                 element={<TareaDetalle tareas={data?.body || []} />}
               ></Route>
-              <Route path="/agregar" element={<FormularioTareas />}></Route>
+              <Route
+                path="/agregar/:id"
+                element={<FormularioTareas tareas={data?.body || []} />}
+              ></Route>
+
+              <Route
+                path="/modificar/:id"
+                element={<FormularioTareas tareas={data?.body || []} />}
+              ></Route>
             </Routes>
           )}
         </div>
